@@ -1,27 +1,19 @@
 <?php
-session_start();
-set_include_path(get_include_path() .
-    PATH_SEPARATOR .
-    realpath(dirname(__FILE__) . "/../service/application/"));
-?>
-    <!DOCTYPE HTML>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Cliente de Ejemplo Servicio Web</title>
-    </head>
-<body>
-<?php
-$usuario="";
-$pass="";
+    session_start();
+    set_include_path(get_include_path() .
+        PATH_SEPARATOR .
+        realpath(dirname(__FILE__) . "/../service/application/"));
 
-if(isset($_GET['usuario'] )){
-    $usuario=$_GET['usuario'] ;
-}
-if(isset($_GET['pass'])){
-       $pass=$_GET['pass'];
-}
-    
+    $usuario="";
+    $pass="";
+
+    if(isset($_GET['usuario'] )){
+        $usuario=$_GET['usuario'] ;
+    }
+    if(isset($_GET['pass'])){
+           $pass=$_GET['pass'];
+    }
+        
     
     require_once("Zend/Soap/Client.php");
     $wsdl_url = "http://localhost:8080/TallerJSP/services/WebServiceProveedor?wsdl";
@@ -41,15 +33,18 @@ if(isset($_GET['pass'])){
             $_SESSION['username']=$usser;
             $_SESSION['session']=$response;
 
-            header('Location: /ClientePHP/menu.php')
+            header('Location: /ClientePHP/menu.php');
 
         }else{
             session_unset();
             session_destroy();
+             $_SESSION['status']='error';
+            header('Location: /ClientePHP/Login.php');
 
         }
     }else{
         session_unset();
         session_destroy();
+        header('Location: /ClientePHP/Login.php');
     }
 ?>

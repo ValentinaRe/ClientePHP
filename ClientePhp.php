@@ -12,6 +12,15 @@ set_include_path(get_include_path() .
     <html>
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"rel="stylesheet"></link>
+    <link href="//oss.maxcdn.com/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css" rel="stylesheet"></link>
+
+    <script src="//oss.maxcdn.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//oss.maxcdn.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+   
         <title>Cliente de Ejemplo Servicio Web</title>
     </head>
 <body>
@@ -29,19 +38,27 @@ if ( isset($_GET['nombre'])) {
         $decoCon= json_decode($respuesta->busquedaSimpleReturn);
 
         ?>
+        <div class="jumbotron">
+        <div class="container">
 
-        <h1>Resultado Busqueda</h1>
+        <h2>Resultado Busqueda</h2>
        
-
+        <tr>
+         <td><a href="busquedaSimple.php" class="btn btn-default">busqueda simple</a></td>
+        <td><a href="busquedaAvanzada.php" class="btn btn-default">busqueda avanzada</a></td>
+        </tr>
  
-            <h1>Búsqueda Simple </h1>
+        <h3>Búsqueda Simple </h3>
        <table class="table table-striped">
+
         <thead>
+        <tr class="success">
         <th>run </th>
         <th>nombre </th>
         <th>apellido </th>
         <th>fotografía </th>
-       
+        <th><th>
+        </tr>
         </thead>
            
             <?php foreach($decoCon as $obj) {
@@ -98,13 +115,15 @@ if ( isset($_GET['nombre'])) {
                                 <?php echo "<input type='hidden' name='ciudad' value='$ciudad'>"?>
                                <?php echo "<input type='hidden' name='fotoCont' value='$fotoCont'>"?>
                                 
-                                <input type="submit" value="Ver Perfil" />
+                                <input type="submit" value="Ver Perfil" class="btn btn-warning"/>
                             </form >
                             </td>
                 </tr>
 
             <?php } ?>
         </table>
+        </div>
+        </div>
         <?php
     }
 }
